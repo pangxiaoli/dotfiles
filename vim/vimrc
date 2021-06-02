@@ -12,6 +12,86 @@
 
 "==
 "==
+"== Base config
+"==
+"==
+
+" 显示行号
+set number
+set rnu
+
+" 语法高亮
+syntax on
+
+" 显示当前模式
+set showmode
+
+" 显示当前命令
+set showcmd
+
+" 支持鼠标
+set mouse=a
+
+" 启用 256 色
+set t_Co=256
+
+" tab 键长度
+set tabstop=4
+
+" 高亮光标所在行
+set cursorline
+
+" 行宽
+set textwidth=90
+
+" 自动折行
+set wrap
+
+" 不在单词内折行
+set linebreak
+
+" 显示状态栏
+set laststatus=2
+
+" 状态栏显示当前光标位置
+set ruler
+
+" 光标遇到括号自动匹配另一半
+set showmatch
+
+" 搜索时高亮显示匹配结果
+set hlsearch
+
+" 输入搜索模式时，每输入一个字符，就自动跳到第一个匹配的结果
+set incsearch
+
+" 搜索忽略大小写
+set ignorecase
+
+" tab 键命令补全
+set wildmenu
+set wildmode=longest:list,full
+
+" 文件类型检测
+filetype on
+
+" 根据不同文件类型加载不同插件
+filetype plugin on
+
+" 键位
+nnoremap <C-h> <C-w>h  
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-l> <C-w>l
+
+let mapleader=";"
+
+
+
+
+
+"==
+"==
 "== vim-plug
 "==
 "==
@@ -101,12 +181,10 @@ colorscheme dracula
 
 " 当 Vim 以目录参数开头时,启动 NERDTree
 autocmd StdinReadPre * let s:std_in=1
-autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists('s:std_in') |
-	\ execute 'NERDTree' argv()[0] | wincmd p | enew | execute 'cd '.argv()[0] | endif
+autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists('s:std_in') | execute 'NERDTree' argv()[0] | wincmd p | enew | execute 'cd '.argv()[0] | endif
 
 " 如果 NERDTree 是剩下的唯一窗口,退出 Vim
-autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() |
-	\ quit | endif
+autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | quit | endif
 
 " 显示隐藏文件
 let NERDTreeShowHidden=1
@@ -142,7 +220,7 @@ let g:NERDTreeGitStatusConcealBrackets = 1
 
 "==
 "==
-"== vim-devicons config
+"== vim-devicons 
 "==
 "==
 
@@ -153,7 +231,7 @@ set guifont=DroidSansMono\ Nerd\ Font\ 11
 
 "==
 "==
-"== coc config
+"== coc 自动补全
 "==
 "==
 
@@ -188,13 +266,14 @@ let g:coc_global_extensions = [
 
 "==
 "==
-"== indentLine config
+"== indentLine 可视化缩进
 "==
 "==
 
-autocmd VimEnter * IndentLinesToggle
-let g:indent_guides_guide_size = 1  	 " 指定对齐线的尺寸
-let g:indent_guides_start_level = 1  	 " 从第二层开始可视化显示缩进
+let g:indentLine_setColors = 0
+let g:indentLine_char_list = ['|', '¦', '┆', '┊']
+let g:indentLine_leadingSpaceEnabled = 1
+let g:indentLine_leadingSpaceChar = '·'
 
 
 
@@ -315,81 +394,3 @@ let g:vimwiki_list = [{'path': '~/wiki/',
 
 
 
-"==
-"==
-"== base config
-"==
-"==
-
-" 显示行号
-set number
-set rnu
-
-" 语法高亮
-syntax on
-
-" 显示当前模式
-set showmode
-
-" 显示当前命令
-set showcmd
-
-" 支持鼠标
-set mouse=a
-
-" 编码
-set encoding=utf-8
-
-" 启用 256 色
-set t_Co=256
-
-" tab 键长度
-set tabstop=4
-
-" 高亮光标所在行
-set cursorline
-
-" 行宽
-set textwidth=90
-
-" 自动折行
-set wrap
-
-" 不在单词内折行
-set linebreak
-
-" 显示状态栏
-set laststatus=2
-
-" 状态栏显示当前光标位置
-set ruler
-
-" 光标遇到括号自动匹配另一半
-set showmatch
-
-" 搜索时高亮显示匹配结果
-set hlsearch
-
-" 输入搜索模式时，每输入一个字符，就自动跳到第一个匹配的结果
-set incsearch
-
-" 搜索忽略大小写
-set ignorecase
-
-" tab 键命令补全
-set wildmenu
-set wildmode=longest:list,full
-
-" 文件类型检测
-filetype on
-
-" 根据不同文件类型加载不同插件
-filetype plugin on
-
-" 键位
-nnoremap <C-h> <C-w>h  
-nnoremap <C-j> <C-w>j
-nnoremap <C-k> <C-w>k
-nnoremap <C-l> <C-w>l
-
-let mapleader=";"
