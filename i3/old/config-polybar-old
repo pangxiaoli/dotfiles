@@ -68,7 +68,6 @@ set $right semicolon
 #exec --no-startup-id xrandr --output DVI-I-0 --right-of HDMI-0 --auto
 #exec --no-startup-id xrandr --output DVI-1 --right-of DVI-0 --auto
 #exec --no-startup-id xrandr --output DVI-D-1 --right-of DVI-I-1 --auto
-#exec --no-startup-id xrandr --output HDMI-2 --right-of HDMI-1 --auto
 exec --no-startup-id xrandr --output HDMI2 --right-of HDMI1 --auto
 
 
@@ -86,9 +85,6 @@ exec --no-startup-id xrandr --output HDMI2 --right-of HDMI1 --auto
 
 #set $firstMonitor DVI-I-1
 #set $secondMonitor DVI-D-1
-
-#set $firstMonitor HDMI-1
-#set $secondMonitor HDMI-2
 
 set $firstMonitor HDMI1
 set $secondMonitor HDMI2
@@ -138,13 +134,10 @@ bindsym $mod+Shift+0 move container to workspace 10; workspace 10
 bindsym $mod+shift+d exec --no-startup-id dmenu_run -i -nb '#191919' -nf '#fea63c' -sb '#fea63c' -sf '#191919' -fn 'NotoMonoRegular:bold:pixelsize=14'
 
 # gmrun
-#bindsym mod1+F2 exec --no-startup-id gmrun
+bindsym mod1+F2 exec --no-startup-id gmrun
 
 # start xfce-appfinder
 bindsym mod1+F3 exec --no-startup-id xfce4-appfinder
-
-# start xlunch app launcher
-# bindsym mod1+F5 exec --no-startup-id xlunch --config ~/.config/xlunch/default.conf --input ~/.config/xlunch/entries.dsv
 
 # start rofi full
 bindsym $mod+F11 exec --no-startup-id rofi -show run -fullscreen -font "Noto Sans 13"
@@ -158,9 +151,14 @@ bindsym $mod+F12 exec --no-startup-id rofi -show run -font "Noto Sans 13"
 #################                          how to exit, logoff, suspend, ...                        #################
 #####################################################################################################################
 
-#Backup exit
-#Press ctrl+alt+x - check toolbar for next choices
-bindsym control+mod1+X mode "$mode_system"
+# current code
+# exit i3 (logs you out of your X session)
+bindsym $mod+Shift+e exec --no-startup-id "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
+
+
+#Press $mod (super) and X to exit - check toolbar for next choices
+bindsym $mod+X mode "$mode_system"
+bindsym control+mod1+Delete mode "$mode_system"
 
 set $mode_system System (k) lock, (l) logout, (u) suspend, (h) hibernate, (r) reboot, (s) shutdown
 mode "$mode_system" {
@@ -177,9 +175,9 @@ mode "$mode_system" {
 }
 
 
-# ArcoLinux Logout
-bindsym $mod+Shift+e exec --no-startup-id arcolinux-logout
-bindsym $mod+X exec --no-startup-id arcolinux-logout
+# Future code
+#bindsym $mod+Shift+e exec --no-startup-id arcolinux-logout
+#bindsym $mod+X exec --no-startup-id arcolinux-logout
 
 
 #####################################################################################################################
@@ -192,10 +190,6 @@ bindsym $mod+Shift+r restart
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
-
-# lock
-exec --no-startup-id xss-lock --transfer-sleep-lock -- '~/.config/i3/scripts/i3exit.sh lock' --nofork
-bindsym mod1+l exec --no-startup-id ~/.config/i3/scripts/i3exit.sh lock, mode "default"
 
 
 
@@ -278,10 +272,10 @@ for_window [urgent=latest] focus
 default_orientation horizontal
 
 # split in horizontal orientation
-bindsym $mod+h split horizontal 
+bindsym $mod+h split h
 
 # split in vertical orientation
-bindsym $mod+v split vertical 
+bindsym $mod+v split v
 
 # enter fullscreen mode for the focused container
 # Super + F in arcolinux is execute thunar
@@ -289,9 +283,9 @@ bindsym $mod+f fullscreen toggle
 
 # change container layout (stacked, tabbed, toggle split)
 # qwerty/azerty issue for letter z
-# bindsym $mod+s layout stacking
-# bindsym $mod+z layout tabbed
-# bindsym $mod+e layout toggle split
+bindsym $mod+s layout stacking
+bindsym $mod+z layout tabbed
+bindsym $mod+e layout toggle split
 
 
 # change focus between tiling / floating windows
@@ -300,8 +294,8 @@ bindsym $mod+space focus mode_toggle
 # focus the parent container
 bindsym $mod+a focus parent
 
-# rofi
-bindsym $mod+d exec --no-startup-id rofi -show drun -show-icons
+# focus the child container
+#bindsym $mod+d focus child
 
 
 
@@ -311,15 +305,7 @@ bindsym $mod+d exec --no-startup-id rofi -show drun -show-icons
 #################                          resize                                                   #################
 #####################################################################################################################
 
-# Resizing by 1
-bindsym $mod+Mod1+Ctrl+Right resize shrink width 1 px or 1 ppt
-bindsym $mod+Mod1+Ctrl+Up resize grow height 1 px or 1 ppt
-bindsym $mod+Mod1+Ctrl+Down resize shrink height 1 px or 1 ppt
-bindsym $mod+Mod1+Ctrl+Left resize grow width 1 px or 1 ppt
 
-
-####################################################################################################################
-#old resize keybindings
 # resize window (you can also use the mouse for that)
 
 bindsym $mod+r mode "resize"
@@ -331,21 +317,24 @@ mode "resize" {
         # Pressing right will grow the window’s width.
         # Pressing up will shrink the window’s height.
         # Pressing down will grow the window’s height.
-       bindsym $left       resize shrink width 10 px or 10 ppt
-       bindsym $down       resize grow height 10 px or 10 ppt
-       bindsym $up         resize shrink height 10 px or 10 ppt
-       bindsym $right      resize grow width 10 px or 10 ppt
+        bindsym $left       resize shrink width 10 px or 10 ppt
+        bindsym $down       resize grow height 10 px or 10 ppt
+        bindsym $up         resize shrink height 10 px or 10 ppt
+        bindsym $right      resize grow width 10 px or 10 ppt
 
         # same bindings, but for the arrow keys
-       bindsym Left        resize shrink width 10 px or 10 ppt
-       bindsym Down        resize grow height 10 px or 10 ppt
-       bindsym Up          resize shrink height 10 px or 10 ppt
-       bindsym Right       resize grow width 10 px or 10 ppt
+        bindsym Left        resize shrink width 10 px or 10 ppt
+        bindsym Down        resize grow height 10 px or 10 ppt
+        bindsym Up          resize shrink height 10 px or 10 ppt
+        bindsym Right       resize grow width 10 px or 10 ppt
 
         # back to normal: Enter or Escape
-     bindsym Return mode "default"
-     bindsym Escape mode "default"
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
 }
+
+
+
 
 
 #####################################################################################################################
@@ -396,11 +385,10 @@ font pango:Noto Mono Regular 13
 # Workspace 8 file managers
 #assign [class="Nemo|Thunar|Caja|nautilus|Nautilus"]                                 → 8
 
-# Workspace 9 music clients
-assign [class="netease-cloud-music|qqmusic-appimage"]                                                    → 9
+# Workspace 9 email clients
+#assign [class="Geary|Evolution"]                                                    → 9
 
-# Workspace 10 email related
-assign [class="Thunderbird|thunderbird"]                                                    → 10
+# Workspace 10 music related
 #assign [class="Spotify|spotify"]                                                    → 10
 #fix for spotify not moving to workspace 10
 #for_window [class="Spotify"] move to workspace 10
@@ -417,9 +405,6 @@ assign [class="Thunderbird|thunderbird"]                                        
 # ArcoLinux Welcome App
 exec --no-startup-id dex $HOME/.config/autostart/arcolinux-welcome-app.desktop
 
-# Autotiling
-exec_always --no-startup-id autotiling
-
 #browser
 #exec --no-startup-id vivaldi-stable
 for_window [class="Vivaldi-stable"] focus
@@ -432,26 +417,12 @@ for_window [class="Vivaldi-stable"] focus
 #exec --no-startup-id thunar
 
 #Mail clients
-exec --no-startup-id thunderbird
+#exec --no-startup-id evolution
 
 #Music
 #exec --no-startup-id spotify
-#for_window [class="Spotify"] focus
+for_window [class="Spotify"] focus
 
-#Fcitx
-exec --no-startup-id fcitx
-
-#copyq
-exec --no-startup-id copyq
-
-#flameshot
-exec --no-startup-id flameshot
-
-#nutstore
-exec --no-startup-id nutstore
-
-#mpd
-exec --no-startup-id mpd
 
 
 # TRAY APPLICATIONS
@@ -485,13 +456,13 @@ exec_always --no-startup-id numlockx on
 exec --no-startup-id volumeicon
 
 #variety
-exec --no-startup-id variety
+#exec --no-startup-id variety
 
 # clipman
 #exec --no-startup-id xfce4-clipman
 
 #Conky
-#exec --no-startup-id conky -c ~/.config/i3/system-overview
+exec --no-startup-id conky -c ~/.config/i3/system-overview
 
 #feh sets wallpaper
 exec --no-startup-id feh --bg-fill /usr/share/backgrounds/arcolinux/arco-wallpaper.jpg &
@@ -521,7 +492,7 @@ bindsym control+mod1+w exec --no-startup-id arcolinux-welcome-app
 #ArcoLinux Tweak Tool
 bindsym control+mod1+e exec --no-startup-id arcolinux-tweak-tool
 
-#conky<ScrollWheelDown>
+#conky
 bindsym $mod+c exec --no-startup-id conky-toggle
 bindsym control+mod1+Next exec --no-startup-id conky-rotate -n
 bindsym control+mod1+Prior exec --no-startup-id conky-rotate -p
@@ -543,9 +514,9 @@ bindsym control+mod1+m exec --no-startup-id xfce4-settings-manager
 #catfish
 bindsym control+mod1+c exec --no-startup-id catfish;focus
 
-#arcolinux-logout
-bindsym control+mod1+k exec --no-startup-id arcolinux-logout
-bindsym control+mod1+l exec --no-startup-id arcolinux-logout
+#slimlock
+#arcolinux conflict
+bindsym Mod1+k exec slimlock
 
 #rofi theme selector
 bindsym control+mod1+r exec --no-startup-id rofi-theme-selector
@@ -643,7 +614,6 @@ bindsym Control+Shift+Print exec --no-startup-id gnome-screenshot -i
 
 for_window [class="Arcolinux-welcome-app.py"] floating enable
 #for_window [class="Arcolinux-tweak-tool.py"] floating enable
-for_window [class="Arcolinux-calamares-tool.py"] floating enable
 for_window [class="Bleachbit"] floating disable
 for_window [class="Blueberry.py"] floating enable
 for_window [class="Brasero"] floating disable
@@ -765,12 +735,9 @@ bindsym XF86AudioStop exec --no-startup-id playerctl stop
 #################                          xbacklight                                               #################
 #####################################################################################################################
 
-# bindsym XF86MonBrightnessUp exec --no-startup-id xbacklight -inc 20 # increase screen brightness
-# bindsym XF86MonBrightnessDown exec --no-startup-id xbacklight -dec 20 # decrease screen brightness
+bindsym XF86MonBrightnessUp exec --no-startup-id xbacklight -inc 20 # increase screen brightness
+bindsym XF86MonBrightnessDown exec --no-startup-id xbacklight -dec 20 # decrease screen brightness
 
-# light-git
-bindsym XF86MonBrightnessUp exec light -A 5 # increase screen brightness
-bindsym XF86MonBrightnessDown exec light -U 5 # decrease screen brightness
 
 
 #####################################################################################################################
@@ -902,111 +869,18 @@ bindsym control+mod1+o exec --no-startup-id ~/.config/i3/scripts/picom-toggle.sh
 #####################################################################################################################
 #####################################################################################################################
 
-# bar {
+##START THEMING WM
+#Theme name : ArcoLinux Default
 
-    # height 25
-    # workspace_buttons yes
-    # font pango:Noto Sans 14
-    # font pango: Hack 14
+  # class                 border  backgr. text    indicator
+  client.placeholder      #242424 #242424 #242424
+  client.background       #242424 #242424 #242424
+  client.focused          #6790EB #6790EB #e5e5e5 #6790EB
+  client.unfocused        #222222 #222222 #aaaaaa #222222
+  client.focused_inactive #222222 #222222 #a9a9a9 #222222
+  client.urgent           #d42121 #d42121 #f7f7f7 #d42121
 
-    #position top
-    #position bottom
-
-    #system icons
-    #tray_output none
-    #tray_output $firstMonitor
-    #tray_output $secondMonitor
-
-
-
-    # OPTION 1 : i3status
-
-    # type status_command i3status without the config file and
-    # you will get the standard i3status bar
-    # Second one is the standard statusbar with my personal settings
-
-    #status_command i3status
-    # status_command i3status -c ~/.config/i3/i3status.conf
-
-
-
-    # OPTION 2 : i3blocks
-
-    # https://github.com/vivien/i3blocks
-    # another way to provide text in the statusbar
-    # put hastag in front if not installed
-
-    #status_command i3blocks
-    #status_command i3blocks -c ~/.config/i3/i3blocks.conf
-    #status_command i3blocks -c ~/.config/i3/i3blocks-rainbow.conf
-    #status_command i3blocks -c ~/.config/i3/i3blocks-original.conf
-    #status_command i3blocks -c ~/.config/i3/i3blocks-awesome.conf
-
-
-    # OPTION 3 : conky
-
-    # You can also replace the istatus bar with a conky
-    # start-conky-i3statusbar.sh is started and conky will follow
-    # documentation : https://i3wm.org/docs/user-contributed/conky-i3bar.html
-    # conky configuration is in conky-i3statusbar
-
-    #status_command ~/.config/i3/start-conky-i3statusbar.sh
-
-
-
-    # OPTION 4 : polybar
-
-    # polybar is launched elsewhere - search for the word
-    # from the opening of the "bar {...}" till the end has to go or hashtagged out
-    # in order for the system trayicons to show up in polybar
-
-
-    ##START THEMING BAR
-    #Theme name : ArcoLinux Default
-
-    # i3 bar colors
-    # variable border background Text
-
-    #colors {
-        # background #2F2F2F
-        # statusline #eeeeee
-        # separator  #666666
-
-        # colorclass           border  backgr. text
-        # focused_workspace     #a9a9a9 #5f676a #eeeeee
-        # active_workspace      #a9a9a9 #5f676a #eeeeee
-        # inactive_workspace    #a9a9a9 #222222 #a9a9a9
-        # urgent_workspace      #a9a9a9 #d42121 #FFFFFF
-        # }
-
-    # }
-    ##STOP THEMING BAR
-
-    ##START THEMING WM
-    # Theme name : ArcoLinux Default
-
-    # Window color settings
-    # class                 border  backgr. text    indicator
-    # client.focused          #6790EB #6790EB #e5e5e5 #6790EB
-    # client.unfocused        #222222 #222222 #aaaaaa #222222
-    # client.focused_inactive #222222 #222222 #a9a9a9 #222222
-    # client.placeholder      #222222 #222222 #aaaaaa #222222
-    # client.urgent           #d42121 #d42121 #f7f7f7 #d42121
-
-    # client.background       #242424
-
-
-    # Theme name : Dracula
-    # class                 border  bground text    indicator child_border
-    client.focused          #6272A4 #6272A4 #F8F8F2 #6272A4   #6272A4
-    client.focused_inactive #44475A #44475A #F8F8F2 #44475A   #44475A
-    client.unfocused        #282A36 #282A36 #BFBFBF #282A36   #282A36
-    client.urgent           #44475A #FF5555 #F8F8F2 #FF5555   #FF5555
-    client.placeholder      #282A36 #282A36 #F8F8F2 #282A36   #282A36
-
-    client.background       #F8F8F2
-    
-    ##STOP THEMING WM
+##STOP THEMING WM
 
 #####################################################################################################################
 #####################################################################################################################

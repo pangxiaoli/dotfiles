@@ -3,8 +3,7 @@
 
 case "$1" in
     lock)
-#        betterlockscreen -l dimblur -- --timestr="%H:%M"
-		bash ~/.config/i3/scripts/lock.sh
+        betterlockscreen -l
         ;;
     logout)
         i3-msg exit
