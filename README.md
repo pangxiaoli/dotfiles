@@ -1,5 +1,5 @@
 # dotfiles
-my dotfiles in ArcoLinux
+my dotfiles for ArcoLinux i3
 
 ## How to install
 
