@@ -1,10 +1,32 @@
 # dotfiles
 my dotfiles in ArcoLinux
 
+## How to install
 
-## vim
+**At first, you'd better backup your own config files!!!**
 
-rename vim/ and vimrc to .vim/ and .vimrc copy to ~
+### vim
+```shell
+mv vim ~/.vim
+mv vimrc ~/.vimrc
+```
 
+### xmodmap 
+```shell
+pacman -S xkeycaps
+xmodmap -pke > ~/.Xmodmap
+mv Xmodmap ~/.Xmodmap
+```
 
+### mpd
+```shell
+pacman -S mpd
+mkdir ~/.config/mpd/playlists
+touch ~/.config/mpd/{database,log,pid,state,sticker.sql}
+mv mpd/mpd.conf ~/.config/mpd/
+```
 
+### i3、polybar、rofi、termite
+```shell
+mv i3 polybar rofi termite ~/.config/
+```
