@@ -27,6 +27,11 @@ map("n", "<A-j>", "<C-w>j", opt)
 map("n", "<A-k>", "<C-w>k", opt)
 map("n", "<A-l>", "<C-w>l", opt)
 
+map("n", "<A-Left>", "<C-w>h", opt)
+map("n", "<A-Down>", "<C-w>j", opt)
+map("n", "<A-Up>", "<C-w>k", opt)
+map("n", "<A-Right>", "<C-w>l", opt)
+
 -- bufferline 
 -- 左右切换
 map("n", "<A-,>", ":BufferLineCyclePrev<CR>", opt)
@@ -41,3 +46,6 @@ map("n", "<A->>", ":BufferLineMoveNext<CR>", opt)
 
 -- nvimTree
 map('n', '<C-n>', ':NvimTreeToggle<CR>', opt)
+--- 尺寸
+map("n", "<A-S-Right>", ":vertical resize +2<CR>", opt)
+map("n", "<A-S-Left>",   ":vertical resize -2<CR>", opt)

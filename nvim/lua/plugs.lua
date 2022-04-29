@@ -33,6 +33,7 @@ return require('packer').startup(function()
 
     use 'norcalli/nvim-colorizer.lua'
 
+    --- 语法高亮
     use {
         'nvim-treesitter/nvim-treesitter',
         run = ':TSUpdate'
