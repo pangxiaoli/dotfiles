@@ -1,8 +1,8 @@
 set $mod Mod4
 
 # i3-gaps 
-for_window [class="^.*"] border pixel 2
-new_window pixel 1
+for_window [class="^.*"] border pixel 0
+new_window pixel 0
 gaps inner 5
 gaps top 40
 
@@ -13,7 +13,7 @@ font pango:monospace 8
 exec_always --no-startup-id numlockx on
 
 #feh sets wallpaper
-exec --no-startup-id feh --bg-fill /home/qiubit/Pictures/wallpapers/4.jpg &
+exec --no-startup-id feh --bg-fill /home/qiubit/Pictures/wallpapers/10.jpg &
 
 #Fcitx
 exec --no-startup-id fcitx
@@ -183,10 +183,10 @@ client.background       #F8F8F2
 
 # workspace
 # Workspace 9 music clients
-assign [class="netease-cloud-music|qqmusic-bin"]                                → 9
+assign [class="netease-cloud-music|qqmusic-bin"]    → 9
 
 # Workspace 10 email related
-assign [class="Thunderbird|thunderbird"]                                             → 10
+assign [class="Thunderbird|thunderbird"]            → 10
 
 # workspace float
-for_window [class="flameshot|linuxqq"] floating enable border none
+for_window [class="flameshot|QQ"] floating enable border none
