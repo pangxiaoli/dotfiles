@@ -30,7 +30,18 @@ cmp.setup {
     },
 
     mapping = {
-      ['<Enter>'] = cmp.mapping.confirm({ select = true }), 
+        -- 上一个
+        ['<Up>'] = cmp.mapping.select_prev_item(),
+        -- 下一个
+        ['<Down>'] = cmp.mapping.select_next_item(),
+        -- 出现补全
+        ['<A-.>'] = cmp.mapping(cmp.mapping.complete(), { 'i', 'c' }),
+        -- 取消
+        ['<A-,>'] = cmp.mapping({
+            i = cmp.mapping.abort(),
+            c = cmp.mapping.close(),
+        }),
+        ['<Enter>'] = cmp.mapping.confirm({ select = true }), 
     },
 }
 

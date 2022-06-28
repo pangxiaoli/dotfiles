@@ -149,6 +149,11 @@ _G.packer_plugins = {
     path = "/home/qiubit/.local/share/nvim/site/pack/packer/start/nvim-cmp",
     url = "https://github.com/hrsh7th/nvim-cmp"
   },
+  ["nvim-colorizer.lua"] = {
+    loaded = true,
+    path = "/home/qiubit/.local/share/nvim/site/pack/packer/start/nvim-colorizer.lua",
+    url = "https://github.com/norcalli/nvim-colorizer.lua"
+  },
   ["nvim-cursorline"] = {
     loaded = true,
     path = "/home/qiubit/.local/share/nvim/site/pack/packer/start/nvim-cursorline",
@@ -163,6 +168,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/qiubit/.local/share/nvim/site/pack/packer/start/nvim-tree.lua",
     url = "https://github.com/kyazdani42/nvim-tree.lua"
+  },
+  ["nvim-treesitter"] = {
+    loaded = true,
+    path = "/home/qiubit/.local/share/nvim/site/pack/packer/start/nvim-treesitter",
+    url = "https://github.com/nvim-treesitter/nvim-treesitter"
   },
   ["nvim-web-devicons"] = {
     loaded = true,
