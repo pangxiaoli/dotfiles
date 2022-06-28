@@ -2,9 +2,9 @@
 my dotfiles for ArcoLinux i3
 
 ## Screenshot
-![0](./Screenshot/0.jpg)
-![1](./Screenshot/1.jpg)
-![2](./Screenshot/2.jpg)
+![1](./Screenshot/1.png)
+![2](./Screenshot/2.png)
+![3](./Screenshot/3.jpg)
 
 ## How to install
 
